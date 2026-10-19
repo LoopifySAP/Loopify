@@ -135,6 +135,19 @@ h2 { font-size: clamp(2.2rem, 4.4vw, 4rem); }
 .btn-dark:hover { box-shadow: 0 10px 26px rgba(28,67,50,.28); }
 .btn-outline { border-color: rgba(28,67,50,.3); color: var(--forest); }
 
+/* Tombol Try Prototype */
+.btn-prototype {
+  border-color: rgba(28,67,50,.3);
+  color: var(--forest);
+  background: transparent;
+}
+
+.btn-prototype:hover {
+  background: var(--sage-light);
+  box-shadow: 0 6px 18px rgba(28,67,50,.10);
+}
+
+
 .arrow { transition: transform .25s; }
 .btn:hover .arrow { transform: translateX(4px); }
 
