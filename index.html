@@ -3,19 +3,25 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, viewport-fit=cover"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <meta name="theme-color" content="#f6f4ec">
+    <meta name="description" content="Jeda Hijau membantu mahasiswa mengurangi scrolling melalui micro-challenge ramah lingkungan yang kecil, realistis, dan seru.">
 
     <title>Jeda Hijau | Scroll lebih sedikit, tumbuh lebih banyak</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
     >
 
     <style>
+        /* ==============================
+           1. VARIABLES & THEME
+           ============================== */
+
         :root {
             --bg: #f6f4ec;
             --surface: #fffdf7;
@@ -23,13 +29,24 @@
             --muted: #5d6b61;
             --line: #dfdccb;
             --accent: #2f6b4a;
-            --accent-ink: #fff;
+            --accent-ink: #ffffff;
             --soft: #e4eed9;
 
             color-scheme: light;
             box-sizing: border-box;
-            padding-top: env(safe-area-inset-top, 0px);
-            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #121a15;
+            --surface: #1a241e;
+            --ink: #eef2e8;
+            --muted: #a3b2a7;
+            --line: #2c3a31;
+            --accent: #8fd1a9;
+            --accent-ink: #0f1a13;
+            --soft: #223229;
+
+            color-scheme: dark;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -47,127 +64,161 @@
             }
         }
 
-        :root[data-theme="dark"] {
-            --bg: #121a15;
-            --surface: #1a241e;
-            --ink: #eef2e8;
-            --muted: #a3b2a7;
-            --line: #2c3a31;
-            --accent: #8fd1a9;
-            --accent-ink: #0f1a13;
-            --soft: #223229;
-
-            color-scheme: dark;
-        }
-
-        * {
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
         }
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: env(safe-area-inset-top, 0px);
+            scroll-padding-top: 20px;
         }
 
         body {
             margin: 0;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
             background: var(--bg);
             color: var(--ink);
             font: 400 16px/1.65 Inter, system-ui, sans-serif;
-        }
-
-        .wrap {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0 22px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 22px 0;
-        }
-
-        .logo {
-            font: 600 20px Fraunces, Georgia, serif;
-            letter-spacing: -0.01em;
-        }
-
-        nav a.btn {
-            padding: 8px 16px;
-            font-size: 14px;
+            transition: background-color 0.25s ease, color 0.25s ease;
         }
 
         a {
             color: inherit;
         }
 
+        a:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        /* ==============================
+           2. NAVIGATION
+           ============================== */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 22px 0;
+        }
+
+        .logo {
+            font: 600 20px Fraunces, Georgia, serif;
+            letter-spacing: -0.01em;
+            text-decoration: none;
+        }
+
+        /* ==============================
+           3. BUTTONS
+           ============================== */
+
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 24px;
+            border: 1px solid transparent;
+            border-radius: 999px;
             background: var(--accent);
             color: var(--accent-ink);
+            font: 600 15px Inter, sans-serif;
             text-decoration: none;
-            padding: 13px 24px;
-            border-radius: 999px;
-            font-weight: 600;
-            font-size: 15px;
+            cursor: pointer;
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background-color 0.25s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(47, 107, 74, 0.18);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
         }
 
         .btn.ghost {
             background: transparent;
             color: var(--ink);
-            border: 1px solid var(--line);
+            border-color: var(--line);
         }
 
-        .eyebrow {
-            font-size: 12px;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--accent);
-            font-weight: 600;
+        nav .btn {
+            padding: 8px 16px;
+            font-size: 14px;
+            white-space: nowrap;
         }
+
+        /* ==============================
+           4. TYPOGRAPHY
+           ============================== */
 
         h1,
         h2,
         h3 {
+            margin: 0;
             font-family: Fraunces, Georgia, serif;
             font-weight: 600;
             letter-spacing: -0.02em;
             line-height: 1.12;
-            margin: 0;
         }
 
         h1 {
-            font-size: clamp(40px, 8vw, 72px);
             margin: 14px 0 18px;
+            font-size: clamp(40px, 8vw, 72px);
         }
 
         h2 {
-            font-size: clamp(28px, 5vw, 40px);
             margin: 10px 0 12px;
+            font-size: clamp(28px, 5vw, 40px);
         }
 
         h3 {
-            font-size: 20px;
             margin-bottom: 6px;
+            font-size: 20px;
         }
 
         p {
             margin: 0;
         }
 
+        .eyebrow {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
         .lead {
+            max-width: 560px;
             color: var(--muted);
             font-size: 18px;
-            max-width: 560px;
         }
 
         .orn {
+            margin-bottom: 6px;
             color: var(--accent);
             font-size: 22px;
-            margin: 0 0 6px;
         }
+
+        /* ==============================
+           5. HERO SECTION
+           ============================== */
 
         .hero {
             padding: 56px 0 72px;
@@ -175,24 +226,28 @@
 
         .cta {
             display: flex;
-            gap: 12px;
             flex-wrap: wrap;
+            gap: 12px;
             margin-top: 28px;
         }
 
         .stats {
             display: flex;
-            gap: 10px;
             flex-wrap: wrap;
+            gap: 10px;
             margin-top: 36px;
         }
 
         .chip {
-            background: var(--soft);
-            border-radius: 999px;
             padding: 7px 14px;
+            border-radius: 999px;
+            background: var(--soft);
             font-size: 14px;
         }
+
+        /* ==============================
+           6. CONTENT SECTIONS
+           ============================== */
 
         section {
             padding: 60px 0;
@@ -201,19 +256,23 @@
 
         .grid {
             display: grid;
-            gap: 14px;
-            margin-top: 28px;
             grid-template-columns: repeat(
                 auto-fit,
-                minmax(240px, 1fr)
+                minmax(min(100%, 240px), 1fr)
             );
+            gap: 14px;
+            margin-top: 28px;
         }
 
         .card {
-            background: var(--surface);
+            min-width: 0;
+            padding: 22px;
             border: 1px solid var(--line);
             border-radius: 20px;
-            padding: 22px;
+            background: var(--surface);
+            transition:
+                background-color 0.25s ease,
+                border-color 0.25s ease;
         }
 
         .card p {
@@ -222,73 +281,246 @@
         }
 
         .num {
-            font: 600 13px Inter, sans-serif;
-            color: var(--accent);
-            margin-bottom: 10px;
             display: block;
+            margin-bottom: 10px;
+            color: var(--accent);
+            font: 600 13px Inter, sans-serif;
         }
 
+        /* ==============================
+           7. PRICING
+           ============================== */
+
         .price {
-            font: 600 34px Fraunces, Georgia, serif;
             margin: 6px 0;
+            font: 600 34px Fraunces, Georgia, serif;
+        }
+
+        .price small {
+            font: 400 14px Inter, sans-serif;
         }
 
         .card.hl {
-            background: var(--soft);
             border-color: var(--accent);
+            background: var(--soft);
+        }
+
+        .pricing-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 22px;
+            padding: 12px 18px;
+
+            border: 1px solid transparent;
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--accent-ink);
+
+            font: 600 14px Inter, sans-serif;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background-color 0.25s ease;
+        }
+
+        .pricing-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(47, 107, 74, 0.2);
+        }
+
+        .pricing-btn:active {
+            transform: scale(0.96);
+            box-shadow: none;
+        }
+
+        .pricing-btn:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .pricing-btn .arrow {
+            display: inline-block;
+            transition: transform 0.25s ease;
+        }
+
+        .pricing-btn:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        .card.hl {
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                background-color 0.25s ease;
+        }
+
+        .card.hl:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(47, 107, 74, 0.12);
         }
 
         ul.tick {
-            list-style: none;
-            padding: 0;
             margin: 12px 0 0;
+            padding: 0;
+            list-style: none;
         }
 
         ul.tick li {
-            padding-left: 22px;
             position: relative;
+            margin-bottom: 6px;
+            padding-left: 22px;
             color: var(--muted);
             font-size: 15px;
-            margin-bottom: 6px;
         }
 
         ul.tick li::before {
-            content: "❧";
             position: absolute;
             left: 0;
             color: var(--accent);
+            content: "❧";
         }
+
+        /* ==============================
+           8. WAITLIST CALL TO ACTION
+           ============================== */
 
         .band {
+            margin: 20px 0 60px;
+            padding: 44px 28px;
+            border-radius: 28px;
             background: var(--accent);
             color: var(--accent-ink);
-            border-radius: 28px;
-            padding: 44px 28px;
             text-align: center;
-            margin: 20px 0 60px;
         }
 
-        .band .btn {
-            background: var(--accent-ink);
-            color: var(--accent);
-            margin-top: 18px;
+        .band .orn {
+            color: var(--accent-ink);
         }
 
         .band p {
-            opacity: 0.9;
             max-width: 480px;
             margin: 10px auto 0;
+            opacity: 0.9;
         }
 
+        .band .btn {
+            margin-top: 18px;
+            background: var(--accent-ink);
+            color: var(--accent);
+        }
+
+        /* ==============================
+           9. FOOTER
+           ============================== */
+
         footer {
-            border-top: 1px solid var(--line);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
             padding: 28px 0 36px;
+            border-top: 1px solid var(--line);
             color: var(--muted);
             font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
+        }
+
+        /* ==============================
+           10. SCROLL REVEAL ANIMATION
+           ============================== */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition:
+                opacity 0.7s ease,
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .grid .card.reveal:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        .grid .card.reveal:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+
+        .grid .card.reveal:nth-child(4) {
+            transition-delay: 0.3s;
+        }
+
+        /* ==============================
+           11. RESPONSIVE DESIGN
+           ============================== */
+
+        @media (max-width: 600px) {
+            .wrap {
+                padding-right: 18px;
+                padding-left: 18px;
+            }
+
+            .hero {
+                padding: 40px 0 52px;
+            }
+
+            section {
+                padding: 44px 0;
+            }
+
+            .cta .btn {
+                width: 100%;
+            }
+
+            .band {
+                padding: 36px 20px;
+                border-radius: 22px;
+            }
+
+            footer {
+                flex-direction: column;
+            }
+        }
+
+        /* ==============================
+           12. REDUCED MOTION ACCESSIBILITY
+           ============================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+
+            .card.hl:hover,
+            .pricing-btn:hover,
+            .btn:hover {
+                transform: none;
+                box-shadow: none;
+            }
         }
     </style>
 </head>
@@ -296,15 +528,20 @@
 <body>
     <div class="wrap">
 
-        <!-- Navigasi -->
-        <nav>
-            <span class="logo">Jeda Hijau</span>
-            <a class="btn" href="#daftar">Gabung waitlist</a>
+        <!-- NAVIGATION -->
+        <nav aria-label="Navigasi utama">
+            <a class="logo" href="#" aria-label="Jeda Hijau, halaman utama">
+                Jeda Hijau
+            </a>
+
+            <a class="btn" href="#daftar">
+                Gabung waitlist
+            </a>
         </nav>
 
-        <!-- Hero Section -->
+        <!-- HERO -->
         <header class="hero">
-            <div class="orn">❧</div>
+            <div class="orn" aria-hidden="true">❧</div>
 
             <span class="eyebrow">
                 Gerakan hijau untuk mahasiswa
@@ -338,120 +575,123 @@
             </div>
         </header>
 
-        <!-- Target Pengguna -->
+        <!-- TARGET PENGGUNA -->
         <section id="untuk">
             <span class="eyebrow">Untuk siapa</span>
 
             <h2>Dibuat dari kebiasaan kita sendiri.</h2>
 
             <div class="grid">
-                <div class="card">
+                <article class="card">
                     <span class="num">01</span>
                     <h3>Mahasiswa Gen Z</h3>
                     <p>
                         Kamu yang ingin mengurangi scrolling tapi
                         butuh kegiatan pengganti yang tidak membosankan.
                     </p>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <span class="num">02</span>
                     <h3>Organisasi &amp; komunitas kampus</h3>
                     <p>
                         Punya program atau event? Jadikan challenge
                         hijau sebagai aktivitas bersama anggotamu.
                     </p>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <span class="num">03</span>
                     <h3>Kampus &amp; CSR</h3>
                     <p>
                         Fase lanjut: program Jeda Hijau untuk kampus
                         dan mitra yang ingin dampak terukur.
                     </p>
-                </div>
+                </article>
             </div>
         </section>
 
-        <!-- Cara Kerja -->
+        <!-- CARA KERJA -->
         <section id="cara">
             <span class="eyebrow">Cara kerja</span>
 
             <h2>Kurangi scroll, tambah aksi nyata.</h2>
 
             <div class="grid">
-                <div class="card">
+                <article class="card">
                     <span class="num">LANGKAH 1</span>
                     <h3>Atur target</h3>
                     <p>
                         Mulai dari target kecil yang bisa kamu capai,
                         lalu naik bertahap.
                     </p>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <span class="num">LANGKAH 2</span>
                     <h3>Ambil micro-challenge</h3>
                     <p>
                         Bawa tumbler, pilah sampah, jalan kaki ke kelas.
                         Selesai dalam hitungan menit.
                     </p>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <span class="num">LANGKAH 3</span>
                     <h3>Kumpulkan Eco-Points</h3>
                     <p>
                         Setiap aksi dihitung. Pantau progres mingguan
                         sendiri atau bareng tim.
                     </p>
-                </div>
+                </article>
             </div>
         </section>
 
-        <!-- Konsistensi Pengguna -->
+        <!-- KONSISTENSI -->
         <section id="bersama">
             <span class="eyebrow">Tetap konsisten</span>
 
             <h2>Kamu tidak jalan sendirian.</h2>
 
             <div class="grid">
-                <div class="card">
+                <article class="card">
                     <h3>Onboarding ringan</h3>
                     <p>
                         Target bertahap supaya tidak kaget dan tidak
                         menyerah di minggu pertama.
                     </p>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <h3>Reminder sesukamu</h3>
                     <p>
                         Atur sendiri kapan diingatkan. Progres mingguan
                         dirangkum otomatis.
                     </p>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <h3>Accountability partner</h3>
                     <p>
                         Pilih teman untuk saling jaga.
                         Komunitas bersifat opsional.
                     </p>
-                </div>
+                </article>
             </div>
         </section>
 
-        <!-- Harga -->
+        <!-- PRICING -->
         <section id="harga">
             <span class="eyebrow">Harga</span>
 
             <h2>Mulai gratis. Naik kalau cocok.</h2>
 
             <div class="grid">
-                <div class="card">
+
+                <!-- PAKET GRATIS -->
+                <article class="card">
                     <h3>Gratis</h3>
+
                     <div class="price">Rp0</div>
 
                     <ul class="tick">
@@ -459,15 +699,19 @@
                         <li>Eco-Points &amp; progres</li>
                         <li>Mode individu</li>
                     </ul>
-                </div>
 
-                <div class="card hl">
+                    <a class="pricing-btn" href="#daftar">
+                        Mulai Gratis
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </a>
+                </article>
+
+                <!-- PAKET PREMIUM -->
+                <article class="card hl">
                     <h3>Premium</h3>
 
                     <div class="price">
-                        Rp19.000<small
-                            style="font: 400 14px Inter, sans-serif;"
-                        > /bulan</small>
+                        Rp19.000<small> /bulan</small>
                     </div>
 
                     <ul class="tick">
@@ -475,10 +719,17 @@
                         <li>Fitur tim &amp; statistik lanjutan</li>
                         <li>Harga masih tahap uji</li>
                     </ul>
-                </div>
 
-                <div class="card">
+                    <a class="pricing-btn" href="#daftar">
+                        Pilih Premium
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </a>
+                </article>
+
+                <!-- PAKET KAMPUS & BRAND -->
+                <article class="card">
                     <h3>Kampus &amp; Brand</h3>
+
                     <div class="price">Segera</div>
 
                     <ul class="tick">
@@ -486,48 +737,54 @@
                         <li>Sponsored challenge</li>
                         <li>Laporan dampak</li>
                     </ul>
-                </div>
+
+                    <a class="pricing-btn" href="#daftar">
+                        Hubungi Kami
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </a>
+                </article>
+
             </div>
         </section>
 
-        <!-- Kanal Promosi -->
+        <!-- KANAL PROMOSI -->
         <section id="temukan">
             <span class="eyebrow">Temukan kami</span>
 
             <h2>Ada di tempat kamu biasa scroll.</h2>
 
             <div class="grid">
-                <div class="card">
+                <article class="card">
                     <h3>Konten pendek</h3>
                     <p>
                         TikTok dan Instagram dengan tips hijau singkat.
                     </p>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <h3>Event &amp; booth</h3>
                     <p>
                         Scan QR di booth, organisasi, dan ambassador kampus.
                     </p>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <h3>Ajak teman</h3>
                     <p>
                         Referral teman dan akses lewat landing page atau app.
                     </p>
-                </div>
+                </article>
             </div>
         </section>
 
-        <!-- Tim dan Pengembangan -->
+        <!-- TIM -->
         <section id="tim">
             <span class="eyebrow">Di balik layar</span>
 
             <h2>Dibangun serius, dijalankan bareng.</h2>
 
             <div class="grid">
-                <div class="card">
+                <article class="card">
                     <h3>Yang kami punya</h3>
 
                     <ul class="tick">
@@ -535,9 +792,9 @@
                         <li>Aplikasi, data progres, pustaka challenge</li>
                         <li>Brand, early users, komunitas</li>
                     </ul>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <h3>Yang kami kerjakan</h3>
 
                     <ul class="tick">
@@ -545,9 +802,9 @@
                         <li>Kurasi challenge, konten, komunitas</li>
                         <li>Ukur retensi, screen time, dan harga</li>
                     </ul>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <h3>Mitra</h3>
 
                     <ul class="tick">
@@ -555,9 +812,9 @@
                         <li>Komunitas lingkungan &amp; zero waste</li>
                         <li>UMKM hijau, refill station, cloud, CSR</li>
                     </ul>
-                </div>
+                </article>
 
-                <div class="card">
+                <article class="card">
                     <h3>Ke mana dana mengalir</h3>
 
                     <ul class="tick">
@@ -565,15 +822,13 @@
                         <li>Konten, pemasaran, komunitas, reward</li>
                         <li>Legalitas dan aktivasi pilot</li>
                     </ul>
-                </div>
+                </article>
             </div>
         </section>
 
-        <!-- Call to Action -->
+        <!-- WAITLIST CTA -->
         <div class="band" id="daftar">
-            <div class="orn" style="color: var(--accent-ink);">
-                ❧
-            </div>
+            <div class="orn" aria-hidden="true">❧</div>
 
             <h2>Siap jeda sebentar?</h2>
 
@@ -582,6 +837,7 @@
                 Jeda Hijau di kampusmu.
             </p>
 
+            <!-- Ganti URL dengan tautan Google Form milikmu -->
             <a
                 class="btn"
                 href="https://forms.gle/GANTI-LINK-FORM-KAMU"
@@ -592,12 +848,68 @@
             </a>
         </div>
 
-        <!-- Footer -->
+        <!-- FOOTER -->
         <footer>
             <span>© 2026 Jeda Hijau</span>
             <span>Scroll less, grow more.</span>
         </footer>
 
     </div>
+
+    <!-- ==============================
+         JAVASCRIPT: SCROLL ANIMATION
+         ============================== -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const elements = document.querySelectorAll(
+                "section .eyebrow, section h2, section .card, .band"
+            );
+
+            const reduceMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+            // Tampilkan semua konten jika animasi tidak didukung
+            // atau pengguna memilih mengurangi animasi.
+            if (
+                reduceMotion ||
+                !("IntersectionObserver" in window)
+            ) {
+                elements.forEach((element) => {
+                    element.classList.add("is-visible");
+                });
+
+                return;
+            }
+
+            // Tandai elemen yang akan dianimasikan.
+            elements.forEach((element) => {
+                element.classList.add("reveal");
+            });
+
+            // Pantau elemen saat memasuki area layar.
+            const observer = new IntersectionObserver(
+                (entries, observerInstance) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("is-visible");
+
+                            // Jalankan animasi satu kali per elemen.
+                            observerInstance.unobserve(entry.target);
+                        }
+                    });
+                },
+                {
+                    threshold: 0.12,
+                    rootMargin: "0px 0px -40px 0px"
+                }
+            );
+
+            elements.forEach((element) => {
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 </html>
