@@ -2,914 +2,2514 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-    <meta name="theme-color" content="#f6f4ec">
-    <meta name="description" content="Jeda Hijau membantu mahasiswa mengurangi scrolling melalui micro-challenge ramah lingkungan yang kecil, realistis, dan seru.">
-
-    <title>Jeda Hijau | Scroll lebih sedikit, tumbuh lebih banyak</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
-    >
-
-    <style>
-        /* ==============================
-           1. VARIABLES & THEME
-           ============================== */
-
-        :root {
-            --bg: #f6f4ec;
-            --surface: #fffdf7;
-            --ink: #1f2a22;
-            --muted: #5d6b61;
-            --line: #dfdccb;
-            --accent: #2f6b4a;
-            --accent-ink: #ffffff;
-            --soft: #e4eed9;
-
-            color-scheme: light;
-            box-sizing: border-box;
-        }
-
-        :root[data-theme="dark"] {
-            --bg: #121a15;
-            --surface: #1a241e;
-            --ink: #eef2e8;
-            --muted: #a3b2a7;
-            --line: #2c3a31;
-            --accent: #8fd1a9;
-            --accent-ink: #0f1a13;
-            --soft: #223229;
-
-            color-scheme: dark;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --bg: #121a15;
-                --surface: #1a241e;
-                --ink: #eef2e8;
-                --muted: #a3b2a7;
-                --line: #2c3a31;
-                --accent: #8fd1a9;
-                --accent-ink: #0f1a13;
-                --soft: #223229;
-
-                color-scheme: dark;
-            }
-        }
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 20px;
-        }
-
-        body {
-            margin: 0;
-            padding-top: env(safe-area-inset-top, 0px);
-            padding-bottom: env(safe-area-inset-bottom, 0px);
-            background: var(--bg);
-            color: var(--ink);
-            font: 400 16px/1.65 Inter, system-ui, sans-serif;
-            transition: background-color 0.25s ease, color 0.25s ease;
-        }
-
-        a {
-            color: inherit;
-        }
-
-        a:focus-visible {
-            outline: 3px solid var(--accent);
-            outline-offset: 4px;
-        }
-
-        .wrap {
-            width: 100%;
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0 22px;
-        }
-
-        /* ==============================
-           2. NAVIGATION
-           ============================== */
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-            padding: 22px 0;
-        }
-
-        .logo {
-            font: 600 20px Fraunces, Georgia, serif;
-            letter-spacing: -0.01em;
-            text-decoration: none;
-        }
-
-        /* ==============================
-           3. BUTTONS
-           ============================== */
-
-        .btn {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 24px;
-            border: 1px solid transparent;
-            border-radius: 999px;
-            background: var(--accent);
-            color: var(--accent-ink);
-            font: 600 15px Inter, sans-serif;
-            text-decoration: none;
-            cursor: pointer;
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                background-color 0.25s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(47, 107, 74, 0.18);
-        }
-
-        .btn:active {
-            transform: scale(0.97);
-        }
-
-        .btn.ghost {
-            background: transparent;
-            color: var(--ink);
-            border-color: var(--line);
-        }
-
-        nav .btn {
-            padding: 8px 16px;
-            font-size: 14px;
-            white-space: nowrap;
-        }
-
-        /* ==============================
-           4. TYPOGRAPHY
-           ============================== */
-
-        h1,
-        h2,
-        h3 {
-            margin: 0;
-            font-family: Fraunces, Georgia, serif;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            line-height: 1.12;
-        }
-
-        h1 {
-            margin: 14px 0 18px;
-            font-size: clamp(40px, 8vw, 72px);
-        }
-
-        h2 {
-            margin: 10px 0 12px;
-            font-size: clamp(28px, 5vw, 40px);
-        }
-
-        h3 {
-            margin-bottom: 6px;
-            font-size: 20px;
-        }
-
-        p {
-            margin: 0;
-        }
-
-        .eyebrow {
-            color: var(--accent);
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-        }
-
-        .lead {
-            max-width: 560px;
-            color: var(--muted);
-            font-size: 18px;
-        }
-
-        .orn {
-            margin-bottom: 6px;
-            color: var(--accent);
-            font-size: 22px;
-        }
-
-        /* ==============================
-           5. HERO SECTION
-           ============================== */
-
-        .hero {
-            padding: 56px 0 72px;
-        }
-
-        .cta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 28px;
-        }
-
-        .stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 36px;
-        }
-
-        .chip {
-            padding: 7px 14px;
-            border-radius: 999px;
-            background: var(--soft);
-            font-size: 14px;
-        }
-
-        /* ==============================
-           6. CONTENT SECTIONS
-           ============================== */
-
-        section {
-            padding: 60px 0;
-            border-top: 1px solid var(--line);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(
-                auto-fit,
-                minmax(min(100%, 240px), 1fr)
-            );
-            gap: 14px;
-            margin-top: 28px;
-        }
-
-        .card {
-            min-width: 0;
-            padding: 22px;
-            border: 1px solid var(--line);
-            border-radius: 20px;
-            background: var(--surface);
-            transition:
-                background-color 0.25s ease,
-                border-color 0.25s ease;
-        }
-
-        .card p {
-            color: var(--muted);
-            font-size: 15px;
-        }
-
-        .num {
-            display: block;
-            margin-bottom: 10px;
-            color: var(--accent);
-            font: 600 13px Inter, sans-serif;
-        }
-
-        /* ==============================
-           7. PRICING
-           ============================== */
-
-        .price {
-            margin: 6px 0;
-            font: 600 34px Fraunces, Georgia, serif;
-        }
-
-        .price small {
-            font: 400 14px Inter, sans-serif;
-        }
-
-        .card.hl {
-            border-color: var(--accent);
-            background: var(--soft);
-        }
-
-        .pricing-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            margin-top: 22px;
-            padding: 12px 18px;
-
-            border: 1px solid transparent;
-            border-radius: 999px;
-            background: var(--accent);
-            color: var(--accent-ink);
-
-            font: 600 14px Inter, sans-serif;
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                background-color 0.25s ease;
-        }
-
-        .pricing-btn:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(47, 107, 74, 0.2);
-        }
-
-        .pricing-btn:active {
-            transform: scale(0.96);
-            box-shadow: none;
-        }
-
-        .pricing-btn:focus-visible {
-            outline: 3px solid var(--accent);
-            outline-offset: 4px;
-        }
-
-        .pricing-btn .arrow {
-            display: inline-block;
-            transition: transform 0.25s ease;
-        }
-
-        .pricing-btn:hover .arrow {
-            transform: translateX(5px);
-        }
-
-        .card.hl {
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                background-color 0.25s ease;
-        }
-
-        .card.hl:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 28px rgba(47, 107, 74, 0.12);
-        }
-
-        ul.tick {
-            margin: 12px 0 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        ul.tick li {
-            position: relative;
-            margin-bottom: 6px;
-            padding-left: 22px;
-            color: var(--muted);
-            font-size: 15px;
-        }
-
-        ul.tick li::before {
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            content: "❧";
-        }
-
-        /* ==============================
-           8. WAITLIST CALL TO ACTION
-           ============================== */
-
-        .band {
-            margin: 20px 0 60px;
-            padding: 44px 28px;
-            border-radius: 28px;
-            background: var(--accent);
-            color: var(--accent-ink);
-            text-align: center;
-        }
-
-        .band .orn {
-            color: var(--accent-ink);
-        }
-
-        .band p {
-            max-width: 480px;
-            margin: 10px auto 0;
-            opacity: 0.9;
-        }
-
-        .band .btn {
-            margin-top: 18px;
-            background: var(--accent-ink);
-            color: var(--accent);
-        }
-
-        /* ==============================
-           9. FOOTER
-           ============================== */
-
-        footer {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 10px;
-            padding: 28px 0 36px;
-            border-top: 1px solid var(--line);
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        /* ==============================
-           10. SCROLL REVEAL ANIMATION
-           ============================== */
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(28px);
-            transition:
-                opacity 0.7s ease,
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .reveal.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .grid .card.reveal:nth-child(2) {
-            transition-delay: 0.1s;
-        }
-
-        .grid .card.reveal:nth-child(3) {
-            transition-delay: 0.2s;
-        }
-
-        .grid .card.reveal:nth-child(4) {
-            transition-delay: 0.3s;
-        }
-
-        /* ==============================
-           11. RESPONSIVE DESIGN
-           ============================== */
-
-        @media (max-width: 600px) {
-            .wrap {
-                padding-right: 18px;
-                padding-left: 18px;
-            }
-
-            .hero {
-                padding: 40px 0 52px;
-            }
-
-            section {
-                padding: 44px 0;
-            }
-
-            .cta .btn {
-                width: 100%;
-            }
-
-            .band {
-                padding: 36px 20px;
-                border-radius: 22px;
-            }
-
-            footer {
-                flex-direction: column;
-            }
-        }
-
-        /* ==============================
-           12. REDUCED MOTION ACCESSIBILITY
-           ============================== */
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-
-            .reveal {
-                opacity: 1;
-                transform: none;
-            }
-
-            .card.hl:hover,
-            .pricing-btn:hover,
-            .btn:hover {
-                transform: none;
-                box-shadow: none;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f4ec">
+  <meta name="description" content="Jeda Hijau — ruang kecil untuk hidup lebih sadar, sehat, dan berkelanjutan.">
+  <title>Jeda Hijau — Temukan Ritme yang Lebih Hijau</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream: #f6f4ec;
+      --cream-dark: #ebe8dc;
+      --forest: #203e2c;
+      --forest-light: #31563c;
+      --sage: #b8c6a5;
+      --sage-light: #dce4d1;
+      --orange: #dc8056;
+      --text: #24352a;
+      --muted: #6d786c;
+      --white: #fffef9;
+      --radius: 24px;
+      --shadow: 0 18px 50px rgba(32, 62, 44, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--forest-light);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 25px;
+      height: 1px;
+      background: var(--orange);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 500;
+      line-height: 1.13;
+      letter-spacing: -0.035em;
+    }
+
+    h2 {
+      font-size: clamp(2.3rem, 4.5vw, 4rem);
+    }
+
+    .section-intro {
+      max-width: 620px;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 54px;
+    }
+
+    .section-heading.center {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .section-heading.center .eyebrow {
+      justify-content: center;
+    }
+
+    .section-heading.center .section-intro {
+      margin-inline: auto;
+    }
+
+    .italic {
+      color: var(--forest-light);
+      font-style: italic;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 13px 23px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-primary {
+      background: var(--forest);
+      color: var(--white);
+      box-shadow: 0 8px 22px rgba(32, 62, 44, 0.12);
+    }
+
+    .btn-primary:hover {
+      background: var(--forest-light);
+      box-shadow: 0 12px 26px rgba(32, 62, 44, 0.2);
+    }
+
+    .btn-outline {
+      border-color: rgba(32, 62, 44, 0.25);
+      color: var(--forest);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--sage-light);
+      border-color: var(--sage);
+    }
+
+    .arrow {
+      display: inline-block;
+      transition: transform 0.25s ease;
+    }
+
+    .btn:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(246, 244, 236, 0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(32, 62, 44, 0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 78px;
+      gap: 25px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--forest);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      white-space: nowrap;
+    }
+
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: var(--cream);
+      font-family: "DM Sans", sans-serif;
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: #526052;
+      font-size: 0.85rem;
+    }
+
+    .nav-links a:not(.btn) {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:not(.btn):hover {
+      color: var(--orange);
+    }
+
+    .nav-links .btn {
+      min-height: 43px;
+      padding: 10px 18px;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--cream-dark);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--forest);
+      font-size: 1.3rem;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 680px;
+      padding: 75px 0 95px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      animation: slideUp 0.9s ease both;
+    }
+
+    .hero h1 {
+      max-width: 700px;
+      margin-top: 24px;
+      font-size: clamp(3.4rem, 6.5vw, 6.3rem);
+    }
+
+    .hero h1 em {
+      color: var(--forest-light);
+      font-weight: 500;
+    }
+
+    .hero-description {
+      max-width: 500px;
+      margin-top: 25px;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 32px;
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 27px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .avatar-stack {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar-stack span {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      margin-right: -7px;
+      border: 2px solid var(--cream);
+      border-radius: 50%;
+      background: var(--sage-light);
+      font-size: 0.75rem;
+    }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 490px;
+      animation: slideInRight 1s ease both;
+    }
+
+    .art-circle {
+      position: absolute;
+      width: min(410px, 90%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #e4e7d8;
+    }
+
+    .art-circle::before {
+      position: absolute;
+      inset: 25px;
+      border: 1px solid rgba(32, 62, 44, 0.15);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .plant {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 430px;
+      overflow: visible;
+    }
+
+    .floating-card {
+      position: absolute;
+      z-index: 2;
+      padding: 15px 18px;
+      border: 1px solid rgba(32, 62, 44, 0.08);
+      border-radius: 18px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .floating-card strong {
+      display: block;
+      color: var(--forest);
+      font-size: 0.9rem;
+    }
+
+    .floating-card small {
+      color: var(--muted);
+      font-size: 0.74rem;
+    }
+
+    .floating-card.one {
+      top: 12%;
+      right: -1%;
+    }
+
+    .floating-card.two {
+      bottom: 13%;
+      left: -2%;
+      animation-delay: -2s;
+    }
+
+    .floating-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 31px;
+      height: 31px;
+      margin-right: 7px;
+      border-radius: 50%;
+      background: var(--sage-light);
+    }
+
+    /* TICKER */
+    .ticker {
+      overflow: hidden;
+      padding: 18px 0;
+      background: var(--forest);
+      color: var(--cream);
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      align-items: center;
+      gap: 34px;
+      animation: ticker 32s linear infinite;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      font-size: 0.77rem;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .ticker-item span {
+      color: var(--sage);
+      font-size: 1.25rem;
+    }
+
+    /* AUDIENCE / ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-side {
+      position: sticky;
+      top: 120px;
+    }
+
+    .about-side h2 {
+      margin-top: 20px;
+    }
+
+    .about-side p {
+      margin-top: 20px;
+      color: var(--muted);
+    }
+
+    .about-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .about-card {
+      min-height: 230px;
+      padding: 27px;
+      border: 1px solid rgba(32, 62, 44, 0.08);
+      border-radius: var(--radius);
+      background: var(--white);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+    }
+
+    .about-card:nth-child(even) {
+      margin-top: 35px;
+      background: var(--sage-light);
+    }
+
+    .card-icon {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 25px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.75);
+      font-size: 1.35rem;
+    }
+
+    .about-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.35rem;
+    }
+
+    .about-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    /* HOW IT WORKS */
+    .steps-section {
+      background: var(--cream-dark);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .step-card {
+      position: relative;
+      padding: 30px;
+      border-radius: var(--radius);
+      background: var(--white);
+      transition: transform 0.3s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      margin-bottom: 35px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: var(--cream);
+      font-size: 0.9rem;
+    }
+
+    .step-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.55rem;
+    }
+
+    .step-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .step-arrow {
+      position: absolute;
+      top: 35px;
+      right: 28px;
+      color: var(--sage);
+      font-size: 1.5rem;
+    }
+
+    /* CONSISTENCY */
+    .consistency-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 75px;
+    }
+
+    .consistency-art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 390px;
+      border-radius: 48% 48% 20px 20px;
+      background: #e4e7d8;
+      overflow: hidden;
+    }
+
+    .consistency-art svg {
+      width: 75%;
+      max-width: 340px;
+    }
+
+    .quote-note {
+      position: absolute;
+      right: 0;
+      bottom: 25px;
+      width: 205px;
+      padding: 17px;
+      border-radius: 17px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.05rem;
+      font-style: italic;
+    }
+
+    .consistency-copy h2 {
+      margin-top: 20px;
+    }
+
+    .consistency-copy > p {
+      margin-top: 20px;
+      color: var(--muted);
+    }
+
+    .check-list {
+      display: grid;
+      gap: 15px;
+      margin: 27px 0 30px;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.92rem;
+    }
+
+    .check {
+      display: grid;
+      flex: 0 0 24px;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--sage-light);
+      color: var(--forest);
+      font-size: 0.75rem;
+    }
+
+    /* CHALLENGE SLIDER */
+    .challenge-section {
+      background: var(--forest);
+      color: var(--cream);
+      overflow: hidden;
+    }
+
+    .challenge-section .eyebrow {
+      color: var(--sage);
+    }
+
+    .challenge-section .section-intro {
+      color: #c6d0c1;
+    }
+
+    .challenge-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .challenge-top .section-heading {
+      margin-bottom: 0;
+    }
+
+    .slider-controls {
+      display: flex;
+      gap: 10px;
+      padding-bottom: 6px;
+    }
+
+    .slider-btn {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(246, 244, 236, 0.3);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--cream);
+      font-size: 1.3rem;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .slider-btn:hover {
+      background: var(--cream);
+      color: var(--forest);
+    }
+
+    .slider-viewport {
+      margin-top: 48px;
+      overflow: hidden;
+    }
+
+    .slider-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    .challenge-card {
+      flex: 0 0 calc((100% - 40px) / 3);
+      min-height: 335px;
+      padding: 28px;
+      border: 1px solid rgba(246, 244, 236, 0.13);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.06);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .challenge-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .challenge-emoji {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 38px;
+      border-radius: 19px;
+      background: var(--sage-light);
+      font-size: 1.7rem;
+    }
+
+    .challenge-tag {
+      color: var(--sage);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .challenge-card h3 {
+      margin: 10px 0 13px;
+      font-size: 1.6rem;
+    }
+
+    .challenge-card p {
+      color: #c6d0c1;
+      font-size: 0.88rem;
+    }
+
+    .slider-progress {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 27px;
+    }
+
+    .progress-line {
+      flex: 1;
+      height: 2px;
+      background: rgba(246, 244, 236, 0.2);
+    }
+
+    .progress-fill {
+      width: 20%;
+      height: 100%;
+      background: var(--sage);
+      transition: width 0.35s ease;
+    }
+
+    .slider-count {
+      color: var(--sage);
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* COMMUNITY */
+    .community-banner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 35px;
+      padding: 60px;
+      border-radius: 30px;
+      background: var(--sage-light);
+      overflow: hidden;
+    }
+
+    .community-banner h2 {
+      max-width: 650px;
+      margin-top: 17px;
+    }
+
+    .community-banner p {
+      max-width: 570px;
+      margin-top: 17px;
+      color: var(--muted);
+    }
+
+    .community-stamp {
+      display: grid;
+      place-items: center;
+      width: 145px;
+      height: 145px;
+      border: 1px solid rgba(32, 62, 44, 0.25);
+      border-radius: 50%;
+      color: var(--forest);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      text-align: center;
+      transform: rotate(9deg);
+    }
+
+    /* PRICING */
+    .pricing-section {
+      background: #efeee5;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
+      gap: 18px;
+    }
+
+    .price-card {
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      border: 1px solid rgba(32, 62, 44, 0.12);
+      border-radius: var(--radius);
+      background: var(--white);
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .price-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+    }
+
+    .price-card.featured {
+      border-color: var(--forest);
+      background: var(--forest);
+      color: var(--cream);
+    }
+
+    .price-card.featured .price-description,
+    .price-card.featured .price-features li {
+      color: #d2daca;
+    }
+
+    .price-card.featured .price-label {
+      color: var(--sage);
+    }
+
+    .price-label {
+      color: var(--forest-light);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .price-card h3 {
+      margin-top: 12px;
+      font-size: 1.8rem;
+    }
+
+    .price-amount {
+      margin-top: 23px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 2.6rem;
+      line-height: 1.2;
+    }
+
+    .price-amount small {
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+
+    .price-description {
+      min-height: 56px;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .price-divider {
+      height: 1px;
+      margin: 25px 0;
+      background: rgba(32, 62, 44, 0.13);
+    }
+
+    .featured .price-divider {
+      background: rgba(246, 244, 236, 0.2);
+    }
+
+    .price-features {
+      display: grid;
+      gap: 13px;
+      margin-bottom: 30px;
+      list-style: none;
+    }
+
+    .price-features li {
+      display: flex;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .price-features li::before {
+      content: "✓";
+      color: var(--forest-light);
+      font-weight: 700;
+    }
+
+    .featured .price-features li::before {
+      color: var(--sage);
+    }
+
+    .price-card .btn {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .featured .btn {
+      background: var(--cream);
+      color: var(--forest);
+    }
+
+    .pricing-note {
+      margin-top: 25px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    /* TEAM */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .team-card {
+      overflow: hidden;
+      border: 1px solid rgba(32, 62, 44, 0.1);
+      border-radius: var(--radius);
+      background: var(--white);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+
+    .team-portrait {
+      display: grid;
+      place-items: center;
+      min-height: 230px;
+      background: var(--sage-light);
+      font-size: 4rem;
+    }
+
+    .team-card:nth-child(2) .team-portrait {
+      background: #e8dfd0;
+    }
+
+    .team-card:nth-child(3) .team-portrait {
+      background: #dbe4d7;
+    }
+
+    .team-info {
+      padding: 24px;
+    }
+
+    .team-info h3 {
+      font-size: 1.45rem;
+    }
+
+    .team-role {
+      display: block;
+      margin-top: 5px;
+      color: var(--forest-light);
+      font-size: 0.77rem;
+      font-weight: 700;
+    }
+
+    .team-info p {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* WAITLIST */
+    .waitlist-section {
+      padding-top: 30px;
+    }
+
+    .waitlist-box {
+      position: relative;
+      padding: 75px 30px;
+      border-radius: 32px;
+      background: var(--forest);
+      color: var(--cream);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .waitlist-box::before,
+    .waitlist-box::after {
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border: 1px solid rgba(220, 228, 209, 0.18);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .waitlist-box::before {
+      top: -120px;
+      left: -80px;
+    }
+
+    .waitlist-box::after {
+      right: -80px;
+      bottom: -140px;
+      width: 300px;
+      height: 300px;
+    }
+
+    .waitlist-box .eyebrow {
+      color: var(--sage);
+    }
+
+    .waitlist-box .eyebrow::before {
+      background: var(--orange);
+    }
+
+    .waitlist-box h2 {
+      position: relative;
+      max-width: 750px;
+      margin: 20px auto 0;
+    }
+
+    .waitlist-box p {
+      position: relative;
+      max-width: 540px;
+      margin: 20px auto 30px;
+      color: #c6d0c1;
+    }
+
+    .waitlist-box .btn {
+      position: relative;
+      background: var(--cream);
+      color: var(--forest);
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 45px 0 28px;
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      gap: 35px;
+      padding-bottom: 35px;
+      border-bottom: 1px solid rgba(32, 62, 44, 0.13);
+    }
+
+    .footer-about {
+      max-width: 350px;
+    }
+
+    .footer-about p {
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: flex-start;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--forest);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 22px;
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* SLIDE-IN POPUP BAR */
+    .popup-bar {
+      position: fixed;
+      z-index: 150;
+      right: 22px;
+      bottom: 22px;
+      left: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 22px;
+      max-width: 900px;
+      margin-inline: auto;
+      padding: 18px 22px;
+      border: 1px solid rgba(32, 62, 44, 0.1);
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: 0 20px 70px rgba(20, 40, 26, 0.2);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(150%);
+      transition:
+        transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 0.4s ease,
+        visibility 0.4s ease;
+    }
+
+    .popup-bar.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .popup-copy {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .popup-leaf {
+      display: grid;
+      flex: 0 0 43px;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      background: var(--sage-light);
+      font-size: 1.3rem;
+    }
+
+    .popup-copy strong {
+      display: block;
+      color: var(--forest);
+      font-size: 0.9rem;
+    }
+
+    .popup-copy p {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .popup-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .popup-actions .btn {
+      min-height: 43px;
+      padding: 10px 17px;
+      white-space: nowrap;
+    }
+
+    .popup-close {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--muted);
+      font-size: 1.25rem;
+    }
+
+    .popup-close:hover {
+      background: var(--cream-dark);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      z-index: 200;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(18, 34, 23, 0.55);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      position: relative;
+      width: min(480px, 100%);
+      padding: 42px;
+      border-radius: 28px;
+      background: var(--cream);
+      text-align: center;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .modal-overlay.open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      display: grid;
+      place-items: center;
+      width: 37px;
+      height: 37px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--cream-dark);
+      color: var(--forest);
+      font-size: 1.2rem;
+    }
+
+    .modal-icon {
+      display: grid;
+      place-items: center;
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: var(--sage-light);
+      font-size: 1.8rem;
+    }
+
+    .modal h2 {
+      font-size: 2.25rem;
+    }
+
+    .modal p {
+      margin: 17px 0 25px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .modal .btn {
+      width: 100%;
+    }
+
+    /* ANIMATIONS */
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(35px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes ticker {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 950px) {
+      .hero-grid {
+        gap: 20px;
+      }
+
+      .hero-art {
+        min-height: 390px;
+      }
+
+      .about-grid {
+        gap: 40px;
+      }
+
+      .consistency-grid {
+        gap: 40px;
+      }
+
+      .challenge-card {
+        flex-basis: calc((100% - 20px) / 2);
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .price-card:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .price-card:last-child .price-description {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 36px, 560px);
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+
+      .nav-inner {
+        min-height: 70px;
+      }
+
+      .menu-toggle {
+        display: grid;
+        place-items: center;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 22px 22px;
+        border-bottom: 1px solid rgba(32, 62, 44, 0.1);
+        background: var(--cream);
+      }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .nav-links a:not(.btn) {
+        padding: 13px 0;
+        border-bottom: 1px solid rgba(32, 62, 44, 0.08);
+      }
+
+      .nav-links .btn {
+        margin-top: 15px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 65px 0 60px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.2rem, 12vw, 5rem);
+      }
+
+      .hero-art {
+        min-height: 380px;
+        margin-top: 10px;
+      }
+
+      .art-circle {
+        width: min(340px, 80%);
+      }
+
+      .plant {
+        max-width: 360px;
+      }
+
+      .floating-card.one {
+        right: 0;
+      }
+
+      .floating-card.two {
+        left: 0;
+      }
+
+      .about-grid,
+      .consistency-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-side {
+        position: static;
+      }
+
+      .about-cards {
+        gap: 12px;
+      }
+
+      .about-card {
+        min-height: 210px;
+        padding: 20px;
+      }
+
+      .about-card:nth-child(even) {
+        margin-top: 20px;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step-number {
+        margin-bottom: 24px;
+      }
+
+      .consistency-art {
+        min-height: 320px;
+      }
+
+      .challenge-top {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .slider-controls {
+        align-self: flex-end;
+      }
+
+      .challenge-card {
+        flex-basis: 85%;
+        min-height: 310px;
+      }
+
+      .community-banner {
+        grid-template-columns: 1fr;
+        padding: 36px 27px;
+      }
+
+      .community-stamp {
+        width: 105px;
+        height: 105px;
+        font-size: 0.9rem;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-card:last-child {
+        grid-column: auto;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-portrait {
+        min-height: 190px;
+      }
+
+      .footer-main {
+        flex-direction: column;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .popup-bar {
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
+        align-items: flex-start;
+        padding: 15px;
+      }
+
+      .popup-copy {
+        gap: 10px;
+      }
+
+      .popup-leaf {
+        display: none;
+      }
+
+      .popup-copy p {
+        max-width: 190px;
+      }
+
+      .popup-actions {
+        gap: 4px;
+      }
+
+      .popup-actions .btn {
+        min-height: 39px;
+        padding: 9px 12px;
+        font-size: 0.76rem;
+      }
+
+      .popup-close {
+        width: 28px;
+        height: 32px;
+      }
+
+      .modal {
+        padding: 38px 25px 28px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .about-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .about-card:nth-child(even) {
+        margin-top: 0;
+      }
+
+      .popup-copy strong {
+        font-size: 0.8rem;
+      }
+
+      .popup-copy p {
+        font-size: 0.7rem;
+      }
+
+      .popup-actions .btn {
+        padding-inline: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal,
+      .reveal-left,
+      .reveal-right {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="wrap">
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="#home" aria-label="Jeda Hijau - Beranda">
+        <span class="logo-mark">j.</span>
+        Jeda Hijau
+      </a>
 
-        <!-- NAVIGATION -->
-        <nav aria-label="Navigasi utama">
-            <a class="logo" href="#" aria-label="Jeda Hijau, halaman utama">
-                Jeda Hijau
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >☰</button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+        <a href="#tentang">Tentang</a>
+        <a href="#cara-kerja">Cara Kerja</a>
+        <a href="#tantangan">Tantangan</a>
+        <a href="#harga">Keanggotaan</a>
+        <a class="btn btn-primary" href="#gabung">
+          Mulai Perjalanan <span class="arrow">↗</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Mulai dari hal sederhana</span>
+          <h1>
+            Hidup lebih baik, satu <em>jeda</em> dalam satu waktu.
+          </h1>
+          <p class="hero-description">
+            Ruang untuk membangun kebiasaan baik, merawat diri, dan
+            memberi dampak positif bagi bumi—tanpa harus mengubah
+            semuanya sekaligus.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#gabung">
+              Temukan Jeda-mu <span class="arrow">↗</span>
             </a>
-
-            <a class="btn" href="#daftar">
-                Gabung waitlist
+            <a class="btn btn-outline" href="#tentang">
+              Kenali Jeda Hijau <span class="arrow">↓</span>
             </a>
-        </nav>
+          </div>
 
-        <!-- HERO -->
-        <header class="hero">
-            <div class="orn" aria-hidden="true">❧</div>
-
-            <span class="eyebrow">
-                Gerakan hijau untuk mahasiswa
-            </span>
-
-            <h1>
-                Scroll lebih sedikit.<br>
-                Tumbuh lebih banyak.
-            </h1>
-
-            <p class="lead">
-                Ganti waktu scrolling dengan micro-challenge hijau
-                yang kecil, realistis, dan seru. Kumpulkan Eco-Points,
-                lihat progresmu, ajak teman satu tim.
-            </p>
-
-            <div class="cta">
-                <a class="btn" href="#daftar">
-                    Coba lebih awal →
-                </a>
-
-                <a class="btn ghost" href="#cara">
-                    Lihat cara kerjanya
-                </a>
+          <div class="hero-note">
+            <div class="avatar-stack" aria-hidden="true">
+              <span>🌱</span>
+              <span>🍃</span>
+              <span>🌿</span>
             </div>
-
-            <div class="stats">
-                <span class="chip">Gratis untuk fitur inti</span>
-                <span class="chip">Individu atau tim</span>
-                <span class="chip">Target bertahap</span>
-            </div>
-        </header>
-
-        <!-- TARGET PENGGUNA -->
-        <section id="untuk">
-            <span class="eyebrow">Untuk siapa</span>
-
-            <h2>Dibuat dari kebiasaan kita sendiri.</h2>
-
-            <div class="grid">
-                <article class="card">
-                    <span class="num">01</span>
-                    <h3>Mahasiswa Gen Z</h3>
-                    <p>
-                        Kamu yang ingin mengurangi scrolling tapi
-                        butuh kegiatan pengganti yang tidak membosankan.
-                    </p>
-                </article>
-
-                <article class="card">
-                    <span class="num">02</span>
-                    <h3>Organisasi &amp; komunitas kampus</h3>
-                    <p>
-                        Punya program atau event? Jadikan challenge
-                        hijau sebagai aktivitas bersama anggotamu.
-                    </p>
-                </article>
-
-                <article class="card">
-                    <span class="num">03</span>
-                    <h3>Kampus &amp; CSR</h3>
-                    <p>
-                        Fase lanjut: program Jeda Hijau untuk kampus
-                        dan mitra yang ingin dampak terukur.
-                    </p>
-                </article>
-            </div>
-        </section>
-
-        <!-- CARA KERJA -->
-        <section id="cara">
-            <span class="eyebrow">Cara kerja</span>
-
-            <h2>Kurangi scroll, tambah aksi nyata.</h2>
-
-            <div class="grid">
-                <article class="card">
-                    <span class="num">LANGKAH 1</span>
-                    <h3>Atur target</h3>
-                    <p>
-                        Mulai dari target kecil yang bisa kamu capai,
-                        lalu naik bertahap.
-                    </p>
-                </article>
-
-                <article class="card">
-                    <span class="num">LANGKAH 2</span>
-                    <h3>Ambil micro-challenge</h3>
-                    <p>
-                        Bawa tumbler, pilah sampah, jalan kaki ke kelas.
-                        Selesai dalam hitungan menit.
-                    </p>
-                </article>
-
-                <article class="card">
-                    <span class="num">LANGKAH 3</span>
-                    <h3>Kumpulkan Eco-Points</h3>
-                    <p>
-                        Setiap aksi dihitung. Pantau progres mingguan
-                        sendiri atau bareng tim.
-                    </p>
-                </article>
-            </div>
-        </section>
-
-        <!-- KONSISTENSI -->
-        <section id="bersama">
-            <span class="eyebrow">Tetap konsisten</span>
-
-            <h2>Kamu tidak jalan sendirian.</h2>
-
-            <div class="grid">
-                <article class="card">
-                    <h3>Onboarding ringan</h3>
-                    <p>
-                        Target bertahap supaya tidak kaget dan tidak
-                        menyerah di minggu pertama.
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3>Reminder sesukamu</h3>
-                    <p>
-                        Atur sendiri kapan diingatkan. Progres mingguan
-                        dirangkum otomatis.
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3>Accountability partner</h3>
-                    <p>
-                        Pilih teman untuk saling jaga.
-                        Komunitas bersifat opsional.
-                    </p>
-                </article>
-            </div>
-        </section>
-
-        <!-- PRICING -->
-        <section id="harga">
-            <span class="eyebrow">Harga</span>
-
-            <h2>Mulai gratis. Naik kalau cocok.</h2>
-
-            <div class="grid">
-
-                <!-- PAKET GRATIS -->
-                <article class="card">
-                    <h3>Gratis</h3>
-
-                    <div class="price">Rp0</div>
-
-                    <ul class="tick">
-                        <li>Fitur inti challenge</li>
-                        <li>Eco-Points &amp; progres</li>
-                        <li>Mode individu</li>
-                    </ul>
-
-                    <a class="pricing-btn" href="#daftar">
-                        Mulai Gratis
-                        <span class="arrow" aria-hidden="true">→</span>
-                    </a>
-                </article>
-
-                <!-- PAKET PREMIUM -->
-                <article class="card hl">
-                    <h3>Premium</h3>
-
-                    <div class="price">
-                        Rp19.000<small> /bulan</small>
-                    </div>
-
-                    <ul class="tick">
-                        <li>Free trial di awal</li>
-                        <li>Fitur tim &amp; statistik lanjutan</li>
-                        <li>Harga masih tahap uji</li>
-                    </ul>
-
-                    <a class="pricing-btn" href="#daftar">
-                        Pilih Premium
-                        <span class="arrow" aria-hidden="true">→</span>
-                    </a>
-                </article>
-
-                <!-- PAKET KAMPUS & BRAND -->
-                <article class="card">
-                    <h3>Kampus &amp; Brand</h3>
-
-                    <div class="price">Segera</div>
-
-                    <ul class="tick">
-                        <li>Paket kampus</li>
-                        <li>Sponsored challenge</li>
-                        <li>Laporan dampak</li>
-                    </ul>
-
-                    <a class="pricing-btn" href="#daftar">
-                        Hubungi Kami
-                        <span class="arrow" aria-hidden="true">→</span>
-                    </a>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- KANAL PROMOSI -->
-        <section id="temukan">
-            <span class="eyebrow">Temukan kami</span>
-
-            <h2>Ada di tempat kamu biasa scroll.</h2>
-
-            <div class="grid">
-                <article class="card">
-                    <h3>Konten pendek</h3>
-                    <p>
-                        TikTok dan Instagram dengan tips hijau singkat.
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3>Event &amp; booth</h3>
-                    <p>
-                        Scan QR di booth, organisasi, dan ambassador kampus.
-                    </p>
-                </article>
-
-                <article class="card">
-                    <h3>Ajak teman</h3>
-                    <p>
-                        Referral teman dan akses lewat landing page atau app.
-                    </p>
-                </article>
-            </div>
-        </section>
-
-        <!-- TIM -->
-        <section id="tim">
-            <span class="eyebrow">Di balik layar</span>
-
-            <h2>Dibangun serius, dijalankan bareng.</h2>
-
-            <div class="grid">
-                <article class="card">
-                    <h3>Yang kami punya</h3>
-
-                    <ul class="tick">
-                        <li>Tim coding, desain, konten, marketing</li>
-                        <li>Aplikasi, data progres, pustaka challenge</li>
-                        <li>Brand, early users, komunitas</li>
-                    </ul>
-                </article>
-
-                <article class="card">
-                    <h3>Yang kami kerjakan</h3>
-
-                    <ul class="tick">
-                        <li>Build dan uji MVP, riset pengguna</li>
-                        <li>Kurasi challenge, konten, komunitas</li>
-                        <li>Ukur retensi, screen time, dan harga</li>
-                    </ul>
-                </article>
-
-                <article class="card">
-                    <h3>Mitra</h3>
-
-                    <ul class="tick">
-                        <li>UNDIP &amp; organisasi mahasiswa</li>
-                        <li>Komunitas lingkungan &amp; zero waste</li>
-                        <li>UMKM hijau, refill station, cloud, CSR</li>
-                    </ul>
-                </article>
-
-                <article class="card">
-                    <h3>Ke mana dana mengalir</h3>
-
-                    <ul class="tick">
-                        <li>Pengembangan, cloud, keamanan, desain</li>
-                        <li>Konten, pemasaran, komunitas, reward</li>
-                        <li>Legalitas dan aktivasi pilot</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
-        <!-- WAITLIST CTA -->
-        <div class="band" id="daftar">
-            <div class="orn" aria-hidden="true">❧</div>
-
-            <h2>Siap jeda sebentar?</h2>
-
-            <p>
-                Daftar waitlist dan jadi yang pertama mencoba
-                Jeda Hijau di kampusmu.
-            </p>
-
-            <!-- Ganti URL dengan tautan Google Form milikmu -->
-            <a
-                class="btn"
-                href="https://forms.gle/GANTI-LINK-FORM-KAMU"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Daftar sekarang →
-            </a>
+            <span>Langkah kecil. Perubahan yang berarti.</span>
+          </div>
         </div>
 
-        <!-- FOOTER -->
-        <footer>
-            <span>© 2026 Jeda Hijau</span>
-            <span>Scroll less, grow more.</span>
-        </footer>
+        <div class="hero-art" aria-label="Ilustrasi tanaman yang tumbuh">
+          <div class="art-circle"></div>
 
+          <svg class="plant" viewBox="0 0 420 460" fill="none"
+               xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M209 385 C210 300 195 215 211 100"
+                  stroke="#31563C" stroke-width="7" stroke-linecap="round"/>
+            <path d="M207 302 C153 292 110 256 92 210
+                     C145 207 194 244 207 302Z"
+                  fill="#829B73"/>
+            <path d="M207 302 C157 268 124 234 101 217"
+                  stroke="#31563C" stroke-width="3" stroke-linecap="round"/>
+            <path d="M211 245 C255 236 297 199 310 153
+                     C263 160 222 194 211 245Z"
+                  fill="#55784D"/>
+            <path d="M213 239 C249 208 277 180 305 160"
+                  stroke="#31563C" stroke-width="3" stroke-linecap="round"/>
+            <path d="M209 183 C168 165 147 127 153 88
+                     C193 107 216 143 209 183Z"
+                  fill="#A5B995"/>
+            <path d="M207 179 C189 143 169 117 157 96"
+                  stroke="#55784D" stroke-width="3" stroke-linecap="round"/>
+            <path d="M211 138 C218 94 249 62 286 50
+                     C282 91 250 126 211 138Z"
+                  fill="#31563C"/>
+            <path d="M216 132 C239 103 259 76 282 55"
+                  stroke="#A5B995" stroke-width="3" stroke-linecap="round"/>
+            <path d="M211 102 C188 74 186 43 200 18
+                     C224 44 228 75 211 102Z"
+                  fill="#829B73"/>
+            <path d="M210 98 L201 25"
+                  stroke="#31563C" stroke-width="3" stroke-linecap="round"/>
+            <path d="M112 372 L306 372 L286 438
+                     Q209 458 132 438 Z"
+                  fill="#C88D68"/>
+            <path d="M103 365 Q209 350 315 365
+                     L306 384 Q209 400 112 384 Z"
+                  fill="#DCAB88"/>
+            <path d="M147 399 Q209 411 271 399"
+                  stroke="#B67551" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+
+          <div class="floating-card one">
+            <strong><span class="floating-icon">🌿</span> Bertumbuh perlahan</strong>
+            <small>Tak perlu terburu-buru.</small>
+          </div>
+
+          <div class="floating-card two">
+            <strong><span class="floating-icon">☀️</span> Mulai hari ini</strong>
+            <small>Satu langkah sudah berarti.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker" aria-label="Nilai Jeda Hijau">
+      <div class="ticker-track" aria-hidden="true">
+        <div class="ticker-item">
+          Hidup sadar <span>✳</span> Rawat diri <span>✳</span>
+          Jaga bumi <span>✳</span> Bertumbuh bersama <span>✳</span>
+        </div>
+        <div class="ticker-item">
+          Hidup sadar <span>✳</span> Rawat diri <span>✳</span>
+          Jaga bumi <span>✳</span> Bertumbuh bersama <span>✳</span>
+        </div>
+      </div>
     </div>
 
-    <!-- ==============================
-         JAVASCRIPT: SCROLL ANIMATION
-         ============================== -->
+    <!-- ABOUT / AUDIENCE -->
+    <section class="section" id="tentang">
+      <div class="container about-grid">
+        <div class="about-side reveal-left">
+          <span class="eyebrow">Tentang Jeda Hijau</span>
+          <h2>
+            Tidak harus sempurna untuk mulai <span class="italic">berubah.</span>
+          </h2>
+          <p>
+            Kami percaya perubahan yang bertahan lama tidak selalu
+            datang dari langkah besar. Sering kali, semuanya dimulai
+            dari keputusan kecil yang kita ulang setiap hari.
+          </p>
+          <a class="btn btn-outline" href="#cara-kerja" style="margin-top:25px">
+            Kenali caranya <span class="arrow">↗</span>
+          </a>
+        </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const elements = document.querySelectorAll(
-                "section .eyebrow, section h2, section .card, .band"
-            );
+        <div class="about-cards">
+          <article class="about-card reveal">
+            <div class="card-icon">🌱</div>
+            <h3>Mulai dari kecil</h3>
+            <p>
+              Kebiasaan sederhana yang realistis untuk dijalani di
+              tengah kesibukan sehari-hari.
+            </p>
+          </article>
 
-            const reduceMotion = window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            ).matches;
+          <article class="about-card reveal">
+            <div class="card-icon">🧘</div>
+            <h3>Lebih sadar</h3>
+            <p>
+              Memberi ruang untuk diri sendiri, memahami kebutuhan,
+              dan menjalani hari dengan lebih tenang.
+            </p>
+          </article>
 
-            // Tampilkan semua konten jika animasi tidak didukung
-            // atau pengguna memilih mengurangi animasi.
-            if (
-                reduceMotion ||
-                !("IntersectionObserver" in window)
-            ) {
-                elements.forEach((element) => {
-                    element.classList.add("is-visible");
-                });
+          <article class="about-card reveal">
+            <div class="card-icon">🌍</div>
+            <h3>Peduli bumi</h3>
+            <p>
+              Mengubah pilihan sehari-hari menjadi tindakan kecil
+              yang lebih bertanggung jawab terhadap lingkungan.
+            </p>
+          </article>
 
-                return;
-            }
+          <article class="about-card reveal">
+            <div class="card-icon">🤝</div>
+            <h3>Tumbuh bersama</h3>
+            <p>
+              Menemukan dukungan dan inspirasi dari orang-orang
+              yang sedang belajar hal serupa.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-            // Tandai elemen yang akan dianimasikan.
-            elements.forEach((element) => {
-                element.classList.add("reveal");
-            });
+    <!-- HOW IT WORKS -->
+    <section class="section steps-section" id="cara-kerja">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <span class="eyebrow">Cara kerja</span>
+          <h2 style="margin-top:20px">
+            Perjalanan baik dimulai dengan <span class="italic">satu langkah.</span>
+          </h2>
+          <p class="section-intro">
+            Tak perlu rencana yang rumit. Temukan kebiasaan yang
+            sesuai, lakukan dengan ritme sendiri, lalu biarkan
+            perubahan tumbuh seiring waktu.
+          </p>
+        </div>
 
-            // Pantau elemen saat memasuki area layar.
-            const observer = new IntersectionObserver(
-                (entries, observerInstance) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add("is-visible");
+        <div class="steps-grid">
+          <article class="step-card reveal">
+            <span class="step-number">01</span>
+            <span class="step-arrow">↗</span>
+            <h3>Kenali dirimu</h3>
+            <p>
+              Tentukan hal yang ingin kamu perbaiki, mulai dari
+              rutinitas, kesehatan diri, hingga kebiasaan ramah lingkungan.
+            </p>
+          </article>
 
-                            // Jalankan animasi satu kali per elemen.
-                            observerInstance.unobserve(entry.target);
-                        }
-                    });
-                },
-                {
-                    threshold: 0.12,
-                    rootMargin: "0px 0px -40px 0px"
-                }
-            );
+          <article class="step-card reveal">
+            <span class="step-number">02</span>
+            <span class="step-arrow">↗</span>
+            <h3>Pilih satu kebiasaan</h3>
+            <p>
+              Mulai dengan target yang ringan dan masuk akal agar
+              lebih mudah dilakukan secara konsisten.
+            </p>
+          </article>
 
-            elements.forEach((element) => {
-                observer.observe(element);
-            });
+          <article class="step-card reveal">
+            <span class="step-number">03</span>
+            <span class="step-arrow">↗</span>
+            <h3>Rayakan progresmu</h3>
+            <p>
+              Hargai setiap kemajuan, evaluasi prosesnya, dan
+              lanjutkan perjalanan tanpa menuntut kesempurnaan.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONSISTENCY -->
+    <section class="section" id="konsistensi">
+      <div class="container consistency-grid">
+        <div class="consistency-art reveal-left">
+          <svg viewBox="0 0 320 350" fill="none"
+               xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="160" cy="173" r="112" stroke="#B8C6A5"
+                    stroke-width="1.5" stroke-dasharray="4 8"/>
+            <path d="M160 273 C160 217 157 162 163 78"
+                  stroke="#31563C" stroke-width="6" stroke-linecap="round"/>
+            <path d="M160 219 C116 217 84 187 75 148
+                     C118 152 151 180 160 219Z"
+                  fill="#829B73"/>
+            <path d="M160 217 L85 153"
+                  stroke="#31563C" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M162 178 C200 171 229 141 236 106
+                     C199 111 170 139 162 178Z"
+                  fill="#55784D"/>
+            <path d="M165 174 L230 111"
+                  stroke="#31563C" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M161 133 C132 115 123 85 132 60
+                     C159 80 171 107 161 133Z"
+                  fill="#A5B995"/>
+            <path d="M160 128 L135 65"
+                  stroke="#55784D" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M163 92 C172 62 194 44 220 41
+                     C215 68 194 88 163 92Z"
+                  fill="#31563C"/>
+            <path d="M166 89 L216 45"
+                  stroke="#A5B995" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M98 273 Q160 255 222 273 L210 313
+                     Q160 329 110 313 Z"
+                  fill="#C88D68"/>
+            <ellipse cx="160" cy="273" rx="62" ry="11" fill="#DCAB88"/>
+          </svg>
+
+          <div class="quote-note">
+            "Pelan-pelan juga merupakan sebuah kemajuan."
+          </div>
+        </div>
+
+        <div class="consistency-copy reveal-right">
+          <span class="eyebrow">Tentang konsistensi</span>
+          <h2>
+            Bukan tentang seberapa cepat, tetapi <span class="italic">seberapa jauh.</span>
+          </h2>
+          <p>
+            Ada hari ketika semuanya terasa mudah, ada juga hari
+            ketika memulai kembali terasa berat. Keduanya bagian
+            dari proses bertumbuh.
+          </p>
+
+          <ul class="check-list">
+            <li><span class="check">✓</span> Target kecil yang lebih mudah dijalankan.</li>
+            <li><span class="check">✓</span> Ruang untuk belajar dari hari yang sulit.</li>
+            <li><span class="check">✓</span> Kemajuan yang dihargai tanpa membandingkan diri.</li>
+          </ul>
+
+          <a class="btn btn-primary" href="#tantangan">
+            Temukan tantanganmu <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHALLENGE SLIDER -->
+    <section class="section challenge-section" id="tantangan">
+      <div class="container">
+        <div class="challenge-top">
+          <div class="section-heading reveal">
+            <span class="eyebrow">Jelajahi kebiasaan</span>
+            <h2 style="margin-top:20px">
+              Temukan jeda yang <em class="italic">kamu butuhkan.</em>
+            </h2>
+            <p class="section-intro">
+              Pilih satu area untuk mulai membangun rutinitas
+              yang terasa lebih bermakna.
+            </p>
+          </div>
+
+          <div class="slider-controls">
+            <button class="slider-btn" id="sliderPrev"
+                    type="button" aria-label="Tantangan sebelumnya">←</button>
+            <button class="slider-btn" id="sliderNext"
+                    type="button" aria-label="Tantangan berikutnya">→</button>
+          </div>
+        </div>
+
+        <div class="slider-viewport" id="sliderViewport">
+          <div class="slider-track" id="sliderTrack">
+            <article class="challenge-card">
+              <div class="challenge-emoji">💧</div>
+              <span class="challenge-tag">01 / Mindful living</span>
+              <h3>Jeda untuk diri</h3>
+              <p>
+                Bangun rutinitas yang memberi ruang untuk beristirahat,
+                minum air cukup, dan mendengarkan kebutuhan diri.
+              </p>
+            </article>
+
+            <article class="challenge-card">
+              <div class="challenge-emoji">🌿</div>
+              <span class="challenge-tag">02 / Eco habits</span>
+              <h3>Lebih ramah bumi</h3>
+              <p>
+                Mulai dari membawa botol sendiri, mengurangi sampah,
+                atau memilih kebiasaan yang lebih berkelanjutan.
+              </p>
+            </article>
+
+            <article class="challenge-card">
+              <div class="challenge-emoji">📚</div>
+              <span class="challenge-tag">03 / Personal growth</span>
+              <h3>Bertumbuh setiap hari</h3>
+              <p>
+                Sisihkan waktu untuk membaca, menulis jurnal,
+                belajar sesuatu, atau mengembangkan keterampilan.
+              </p>
+            </article>
+
+            <article class="challenge-card">
+              <div class="challenge-emoji">🚶</div>
+              <span class="challenge-tag">04 / Daily movement</span>
+              <h3>Gerak dengan sadar</h3>
+              <p>
+                Temukan gerakan sederhana yang kamu nikmati,
+                seperti berjalan santai atau melakukan peregangan.
+              </p>
+            </article>
+
+            <article class="challenge-card">
+              <div class="challenge-emoji">🌙</div>
+              <span class="challenge-tag">05 / Rest & reset</span>
+              <h3>Ritme yang seimbang</h3>
+              <p>
+                Beri perhatian pada waktu istirahat, kurangi
+                distraksi, dan buat ruang untuk menenangkan pikiran.
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <div class="slider-progress">
+          <div class="progress-line">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="slider-count" id="sliderCount">01 / 05</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section class="section" id="komunitas">
+      <div class="container">
+        <div class="community-banner reveal">
+          <div>
+            <span class="eyebrow">Tidak harus sendiri</span>
+            <h2>
+              Bertumbuh lebih menyenangkan saat kita <span class="italic">bersama.</span>
+            </h2>
+            <p>
+              Setiap orang punya ritme yang berbeda. Temukan inspirasi,
+              saling mendukung, dan belajar dari perjalanan kecil
+              yang dijalani bersama komunitas.
+            </p>
+            <a class="btn btn-primary" href="#gabung" style="margin-top:25px">
+              Kenali komunitas <span class="arrow">↗</span>
+            </a>
+          </div>
+          <div class="community-stamp" aria-hidden="true">
+            GROW<br>WITH<br>CARE ✳
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section pricing-section" id="harga">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <span class="eyebrow">Pilihan keanggotaan</span>
+          <h2 style="margin-top:20px">
+            Ruang untuk bertumbuh, <span class="italic">sesuai ritmemu.</span>
+          </h2>
+          <p class="section-intro">
+            Mulai dari pengalaman dasar hingga dukungan lebih
+            mendalam untuk perjalanan kebiasaanmu.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card reveal">
+            <span class="price-label">Mulai di sini</span>
+            <h3>Gratis</h3>
+            <div class="price-amount">Rp0</div>
+            <p class="price-description">
+              Untuk kamu yang ingin mulai membangun kebiasaan baik.
+            </p>
+            <div class="price-divider"></div>
+            <ul class="price-features">
+              <li>Akses tantangan dasar</li>
+              <li>Pelacakan kebiasaan sederhana</li>
+              <li>Inspirasi mingguan</li>
+              <li>Akses komunitas dasar</li>
+            </ul>
+            <a class="btn btn-outline" href="#gabung">
+              Mulai gratis <span class="arrow">↗</span>
+            </a>
+          </article>
+
+          <article class="price-card featured reveal">
+            <span class="price-label">Pilihan untuk bertumbuh</span>
+            <h3>Premium</h3>
+            <div class="price-amount">
+              Rp19.000 <small>/ bulan</small>
+            </div>
+            <p class="price-description">
+              Untuk kamu yang ingin pengalaman lebih terarah dan personal.
+            </p>
+            <div class="price-divider"></div>
+            <ul class="price-features">
+              <li>Semua fitur Gratis</li>
+              <li>Program tantangan tematik</li>
+              <li>Statistik progres lebih lengkap</li>
+              <li>Materi refleksi tambahan</li>
+            </ul>
+            <a class="btn" href="#gabung">
+              Pilih Premium <span class="arrow">↗</span>
+            </a>
+          </article>
+
+          <article class="price-card reveal">
+            <span class="price-label">Kolaborasi</span>
+            <h3>Kampus & Brand</h3>
+            <div class="price-amount">Custom</div>
+            <p class="price-description">
+              Untuk organisasi dan mitra yang ingin menciptakan dampak.
+            </p>
+            <div class="price-divider"></div>
+            <ul class="price-features">
+              <li>Program kebiasaan kolaboratif</li>
+              <li>Kampanye keberlanjutan</li>
+              <li>Aktivasi komunitas</li>
+              <li>Diskusi kebutuhan program</li>
+            </ul>
+            <a class="btn btn-outline" href="#gabung">
+              Hubungi kami <span class="arrow">↗</span>
+            </a>
+          </article>
+        </div>
+
+        <p class="pricing-note">
+          *Harga dan fitur merupakan rancangan awal dan dapat disesuaikan
+          sebelum layanan diluncurkan.
+        </p>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="section" id="tim">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <span class="eyebrow">Di balik Jeda Hijau</span>
+          <h2 style="margin-top:20px">
+            Berawal dari niat baik, <span class="italic">dibangun bersama.</span>
+          </h2>
+          <p class="section-intro">
+            Jeda Hijau hadir dari keinginan untuk membuat perubahan
+            terasa lebih dekat, lebih ringan, dan lebih mungkin dilakukan.
+          </p>
+        </div>
+
+        <div class="team-grid">
+          <article class="team-card reveal">
+            <div class="team-portrait" aria-hidden="true">🌱</div>
+            <div class="team-info">
+              <h3>Tim Pengembangan</h3>
+              <span class="team-role">PRODUCT & DEVELOPMENT</span>
+              <p>
+                Mengembangkan pengalaman digital yang sederhana,
+                mudah digunakan, dan mendukung kebiasaan positif.
+              </p>
+            </div>
+          </article>
+
+          <article class="team-card reveal">
+            <div class="team-portrait" aria-hidden="true">🍃</div>
+            <div class="team-info">
+              <h3>Tim Komunitas</h3>
+              <span class="team-role">COMMUNITY & ENGAGEMENT</span>
+              <p>
+                Menghadirkan ruang untuk berbagi pengalaman,
+                saling mendukung, dan bertumbuh bersama.
+              </p>
+            </div>
+          </article>
+
+          <article class="team-card reveal">
+            <div class="team-portrait" aria-hidden="true">🌍</div>
+            <div class="team-info">
+              <h3>Tim Keberlanjutan</h3>
+              <span class="team-role">SUSTAINABILITY & IMPACT</span>
+              <p>
+                Mendorong kebiasaan yang lebih sadar dan
+                bertanggung jawab terhadap lingkungan.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WAITLIST -->
+    <section class="section waitlist-section" id="gabung">
+      <div class="container">
+        <div class="waitlist-box reveal">
+          <span class="eyebrow">Langkah pertamamu dimulai di sini</span>
+          <h2>
+            Tidak perlu menunggu waktu yang tepat untuk <em class="italic">memulai.</em>
+          </h2>
+          <p>
+            Jadikan hari ini awal dari kebiasaan yang lebih baik.
+            Isi formulir minat dan ikuti perjalanan Jeda Hijau.
+          </p>
+          <a
+            class="btn"
+            href="https://forms.gle/GANTI-LINK-FORM-KAMU"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Gabung daftar minat <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-about">
+          <a class="logo" href="#home">
+            <span class="logo-mark">j.</span>
+            Jeda Hijau
+          </a>
+          <p>
+            Ruang kecil untuk hidup lebih sadar, membangun kebiasaan
+            baik, dan merawat bumi dengan langkah yang sederhana.
+          </p>
+        </div>
+
+        <nav class="footer-links" aria-label="Navigasi footer">
+          <a href="#tentang">Tentang</a>
+          <a href="#cara-kerja">Cara Kerja</a>
+          <a href="#tantangan">Tantangan</a>
+          <a href="#harga">Keanggotaan</a>
+          <a href="#gabung">Hubungi Kami</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Jeda Hijau. Dibuat dengan niat baik.</span>
+        <span>Pelan-pelan, kita bertumbuh. 🌿</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SLIDE-IN POPUP BAR -->
+  <aside class="popup-bar" id="popupBar" aria-label="Ajakan bergabung">
+    <div class="popup-copy">
+      <div class="popup-leaf" aria-hidden="true">🌿</div>
+      <div>
+        <strong>Siap memulai jeda pertamamu?</strong>
+        <p>Langkah kecilmu bisa dimulai hari ini.</p>
+      </div>
+    </div>
+
+    <div class="popup-actions">
+      <a class="btn btn-primary"
+         href="#gabung"
+         id="popupJoin">Aku mau mulai <span class="arrow">↗</span></a>
+      <button class="popup-close" id="popupClose"
+              type="button" aria-label="Tutup popup">×</button>
+    </div>
+  </aside>
+
+  <!-- MODAL -->
+  <div
+    class="modal-overlay"
+    id="welcomeModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+    aria-describedby="modalDescription"
+  >
+    <div class="modal">
+      <button class="modal-close" id="modalClose"
+              type="button" aria-label="Tutup dialog">×</button>
+      <div class="modal-icon" aria-hidden="true">🌱</div>
+      <span class="eyebrow">Sebuah pengingat kecil</span>
+      <h2 id="modalTitle" style="margin-top:17px">
+        Kamu boleh mulai dari yang sederhana.
+      </h2>
+      <p id="modalDescription">
+        Tak harus langsung mengubah segalanya. Pilih satu kebiasaan
+        kecil, beri dirimu waktu, dan nikmati prosesnya.
+      </p>
+      <a class="btn btn-primary" id="modalExplore" href="#tantangan">
+        Temukan inspirasimu <span class="arrow">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const $ = (selector) => document.querySelector(selector);
+      const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+      // Tahun footer
+      $("#currentYear").textContent = new Date().getFullYear();
+
+      // Mobile navigation
+      const menuToggle = $("#menuToggle");
+      const navLinks = $("#navLinks");
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.setAttribute(
+          "aria-label",
+          isOpen ? "Tutup menu navigasi" : "Buka menu navigasi"
+        );
+        menuToggle.textContent = isOpen ? "×" : "☰";
+      });
+
+      $$("#navLinks a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "Buka menu navigasi");
+          menuToggle.textContent = "☰";
         });
-    </script>
+      });
+
+      // Scroll reveal
+      const revealElements = $$(".reveal, .reveal-left, .reveal-right");
+
+      if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.12,
+            rootMargin: "0px 0px -35px 0px"
+          }
+        );
+
+        revealElements.forEach((element) => revealObserver.observe(element));
+      } else {
+        revealElements.forEach((element) => element.classList.add("visible"));
+      }
+
+      // Challenge slider
+      const track = $("#sliderTrack");
+      const cards = $$(".challenge-card");
+      const prevButton = $("#sliderPrev");
+      const nextButton = $("#sliderNext");
+      const countLabel = $("#sliderCount");
+      const progressFill = $("#progressFill");
+      const viewport = $("#sliderViewport");
+
+      let currentIndex = 0;
+      let visibleCount = getVisibleCount();
+      let maxIndex = Math.max(0, cards.length - visibleCount);
+
+      function getVisibleCount() {
+        if (window.innerWidth <= 760) return 1;
+        if (window.innerWidth <= 950) return 2;
+        return 3;
+      }
+
+      function updateSlider() {
+        visibleCount = getVisibleCount();
+        maxIndex = Math.max(0, cards.length - visibleCount);
+        currentIndex = Math.min(currentIndex, maxIndex);
+
+        const cardWidth = cards[0].getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(track).gap) || 0;
+        const offset = currentIndex * (cardWidth + gap);
+
+        track.style.transform = `translateX(-${offset}px)`;
+        countLabel.textContent =
+          `${String(currentIndex + 1).padStart(2, "0")} / ` +
+          `${String(maxIndex + 1).padStart(2, "0")}`;
+
+        const progress = maxIndex === 0
+          ? 100
+          : ((currentIndex + 1) / (maxIndex + 1)) * 100;
+
+        progressFill.style.width = `${progress}%`;
+        prevButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex >= maxIndex;
+        prevButton.style.opacity = prevButton.disabled ? "0.45" : "1";
+        nextButton.style.opacity = nextButton.disabled ? "0.45" : "1";
+      }
+
+      prevButton.addEventListener("click", () => {
+        currentIndex = Math.max(0, currentIndex - 1);
+        updateSlider();
+      });
+
+      nextButton.addEventListener("click", () => {
+        currentIndex = Math.min(maxIndex, currentIndex + 1);
+        updateSlider();
+      });
+
+      let resizeFrame;
+      window.addEventListener("resize", () => {
+        cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(updateSlider);
+      });
+
+      // Optional touch swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      viewport.addEventListener("touchstart", (event) => {
+        touchStartX = event.changedTouches[0].screenX;
+      }, { passive: true });
+
+      viewport.addEventListener("touchend", (event) => {
+        touchEndX = event.changedTouches[0].screenX;
+        const difference = touchStartX - touchEndX;
+
+        if (Math.abs(difference) < 45) return;
+
+        if (difference > 0 && currentIndex < maxIndex) {
+          currentIndex++;
+        } else if (difference < 0 && currentIndex > 0) {
+          currentIndex--;
+        }
+
+        updateSlider();
+      }, { passive: true });
+
+      updateSlider();
+
+      // Slide-in popup bar appears after scrolling
+      const popupBar = $("#popupBar");
+      const popupClose = $("#popupClose");
+      const popupJoin = $("#popupJoin");
+      let popupDismissed = false;
+
+      function handleScroll() {
+        const scrollableHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+
+        if (scrollableHeight <= 0) return;
+
+        const scrollPercent = window.scrollY / scrollableHeight;
+
+        if (scrollPercent >= 0.24 && !popupDismissed) {
+          popupBar.classList.add("show");
+        }
+      }
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      handleScroll();
+
+      popupClose.addEventListener("click", () => {
+        popupDismissed = true;
+        popupBar.classList.remove("show");
+      });
+
+      popupJoin.addEventListener("click", () => {
+        popupDismissed = true;
+        popupBar.classList.remove("show");
+      });
+
+      // Welcome modal
+      const modal = $("#welcomeModal");
+      const modalClose = $("#modalClose");
+      const modalExplore = $("#modalExplore");
+      let modalDismissed = false;
+      let modalTimer;
+
+      function openModal() {
+        if (modalDismissed || sessionStorage.getItem("jedaModalSeen")) return;
+        modal.classList.add("open");
+        document.body.classList.add("modal-open");
+        sessionStorage.setItem("jedaModalSeen", "true");
+        modalClose.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove("open");
+        document.body.classList.remove("modal-open");
+        modalDismissed = true;
+      }
+
+      // Delay the modal so visitors can first see the page.
+      modalTimer = window.setTimeout(openModal, 9000);
+
+      modalClose.addEventListener("click", closeModal);
+
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+      });
+
+      modalExplore.addEventListener("click", closeModal);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modal.classList.contains("open")) {
+          closeModal();
+        }
+      });
+
+      // Prevent the timer from becoming unnecessary if page is hidden.
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden && modalTimer) {
+          clearTimeout(modalTimer);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
