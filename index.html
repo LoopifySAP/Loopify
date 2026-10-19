@@ -1,1 +1,132 @@
-Hello World
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jeda Hijau | Scroll lebih sedikit, tumbuh lebih banyak</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f6f4ec;--surface:#fffdf7;--ink:#1f2a22;--muted:#5d6b61;--line:#dfdccb;--accent:#2f6b4a;--accent-ink:#fff;--soft:#e4eed9;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a15;--surface:#1a241e;--ink:#eef2e8;--muted:#a3b2a7;--line:#2c3a31;--accent:#8fd1a9;--accent-ink:#0f1a13;--soft:#223229;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121a15;--surface:#1a241e;--ink:#eef2e8;--muted:#a3b2a7;--line:#2c3a31;--accent:#8fd1a9;--accent-ink:#0f1a13;--soft:#223229;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 Inter,system-ui,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font:600 20px Fraunces,Georgia,serif;letter-spacing:-.01em}
+nav a.btn{padding:8px 16px;font-size:14px}
+a{color:inherit}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;padding:13px 24px;border-radius:999px;font-weight:600;font-size:15px}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.02em;line-height:1.12;margin:0}
+h1{font-size:clamp(40px,8vw,72px);margin:14px 0 18px}
+h2{font-size:clamp(28px,5vw,40px);margin:10px 0 12px}
+h3{font-size:20px;margin-bottom:6px}
+p{margin:0}.lead{color:var(--muted);font-size:18px;max-width:560px}
+.orn{color:var(--accent);font-size:22px;margin:0 0 6px}
+.hero{padding:56px 0 72px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px}
+.chip{background:var(--soft);border-radius:999px;padding:7px 14px;font-size:14px}
+section{padding:60px 0;border-top:1px solid var(--line)}
+.grid{display:grid;gap:14px;margin-top:28px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px}
+.card p{color:var(--muted);font-size:15px}
+.num{font:600 13px Inter;color:var(--accent);margin-bottom:10px;display:block}
+.price{font:600 34px Fraunces,Georgia,serif;margin:6px 0}
+.card.hl{background:var(--soft);border-color:var(--accent)}
+ul.tick{list-style:none;padding:0;margin:12px 0 0}
+ul.tick li{padding-left:22px;position:relative;color:var(--muted);font-size:15px;margin-bottom:6px}
+ul.tick li:before{content:"❧";position:absolute;left:0;color:var(--accent)}
+.band{background:var(--accent);color:var(--accent-ink);border-radius:28px;padding:44px 28px;text-align:center;margin:20px 0 60px}
+.band .btn{background:var(--accent-ink);color:var(--accent);margin-top:18px}
+.band p{opacity:.9;max-width:480px;margin:10px auto 0}
+footer{border-top:1px solid var(--line);padding:28px 0 36px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><span class="logo">Jeda Hijau</span><a class="btn" href="#daftar">Gabung waitlist</a></nav>
+
+<header class="hero">
+<div class="orn">❧</div>
+<span class="eyebrow">Gerakan hijau untuk mahasiswa</span>
+<h1>Scroll lebih sedikit.<br>Tumbuh lebih banyak.</h1>
+<p class="lead">Ganti waktu scrolling dengan micro-challenge hijau yang kecil, realistis, dan seru. Kumpulkan Eco-Points, lihat progresmu, ajak teman satu tim.</p>
+<div class="cta"><a class="btn" href="#daftar">Coba lebih awal →</a><a class="btn ghost" href="#cara">Lihat cara kerjanya</a></div>
+<div class="stats"><span class="chip">Gratis untuk fitur inti</span><span class="chip">Individu atau tim</span><span class="chip">Target bertahap</span></div>
+</header>
+
+<section id="untuk">
+<span class="eyebrow">Untuk siapa</span>
+<h2>Dibuat dari kebiasaan kita sendiri.</h2>
+<div class="grid">
+<div class="card"><span class="num">01</span><h3>Mahasiswa Gen Z</h3><p>Kamu yang ingin mengurangi scrolling tapi butuh kegiatan pengganti yang tidak membosankan.</p></div>
+<div class="card"><span class="num">02</span><h3>Organisasi &amp; komunitas kampus</h3><p>Punya program atau event? Jadikan challenge hijau sebagai aktivitas bersama anggotamu.</p></div>
+<div class="card"><span class="num">03</span><h3>Kampus &amp; CSR</h3><p>Fase lanjut: program Jeda Hijau untuk kampus dan mitra yang ingin dampak terukur.</p></div>
+</div>
+</section>
+
+<section id="cara">
+<span class="eyebrow">Cara kerja</span>
+<h2>Kurangi scroll, tambah aksi nyata.</h2>
+<div class="grid">
+<div class="card"><span class="num">LANGKAH 1</span><h3>Atur target</h3><p>Mulai dari target kecil yang bisa kamu capai, lalu naik bertahap.</p></div>
+<div class="card"><span class="num">LANGKAH 2</span><h3>Ambil micro-challenge</h3><p>Bawa tumbler, pilah sampah, jalan kaki ke kelas. Selesai dalam hitungan menit.</p></div>
+<div class="card"><span class="num">LANGKAH 3</span><h3>Kumpulkan Eco-Points</h3><p>Setiap aksi dihitung. Pantau progres mingguan sendiri atau bareng tim.</p></div>
+</div>
+</section>
+
+<section id="bersama">
+<span class="eyebrow">Tetap konsisten</span>
+<h2>Kamu tidak jalan sendirian.</h2>
+<div class="grid">
+<div class="card"><h3>Onboarding ringan</h3><p>Target bertahap supaya tidak kaget dan tidak menyerah di minggu pertama.</p></div>
+<div class="card"><h3>Reminder sesukamu</h3><p>Atur sendiri kapan diingatkan. Progres mingguan dirangkum otomatis.</p></div>
+<div class="card"><h3>Accountability partner</h3><p>Pilih teman untuk saling jaga. Komunitas bersifat opsional.</p></div>
+</div>
+</section>
+
+<section id="harga">
+<span class="eyebrow">Harga</span>
+<h2>Mulai gratis. Naik kalau cocok.</h2>
+<div class="grid">
+<div class="card"><h3>Gratis</h3><div class="price">Rp0</div><ul class="tick"><li>Fitur inti challenge</li><li>Eco-Points &amp; progres</li><li>Mode individu</li></ul></div>
+<div class="card hl"><h3>Premium</h3><div class="price">Rp19.000<small style="font:400 14px Inter"> /bulan</small></div><ul class="tick"><li>Free trial di awal</li><li>Fitur tim &amp; statistik lanjutan</li><li>Harga masih tahap uji</li></ul></div>
+<div class="card"><h3>Kampus &amp; Brand</h3><div class="price">Segera</div><ul class="tick"><li>Paket kampus</li><li>Sponsored challenge</li><li>Laporan dampak</li></ul></div>
+</div>
+</section>
+
+<section id="temukan">
+<span class="eyebrow">Temukan kami</span>
+<h2>Ada di tempat kamu biasa scroll.</h2>
+<div class="grid">
+<div class="card"><h3>Konten pendek</h3><p>TikTok dan Instagram dengan tips hijau singkat.</p></div>
+<div class="card"><h3>Event &amp; booth</h3><p>Scan QR di booth, organisasi, dan ambassador kampus.</p></div>
+<div class="card"><h3>Ajak teman</h3><p>Referral teman dan akses lewat landing page atau app.</p></div>
+</div>
+</section>
+
+<section id="tim">
+<span class="eyebrow">Di balik layar</span>
+<h2>Dibangun serius, dijalankan bareng.</h2>
+<div class="grid">
+<div class="card"><h3>Yang kami punya</h3><ul class="tick"><li>Tim coding, desain, konten, marketing</li><li>Aplikasi, data progres, pustaka challenge</li><li>Brand, early users, komunitas</li></ul></div>
+<div class="card"><h3>Yang kami kerjakan</h3><ul class="tick"><li>Build dan uji MVP, riset pengguna</li><li>Kurasi challenge, konten, komunitas</li><li>Ukur retensi, screen time, dan harga</li></ul></div>
+<div class="card"><h3>Mitra</h3><ul class="tick"><li>UNDIP &amp; organisasi mahasiswa</li><li>Komunitas lingkungan &amp; zero waste</li><li>UMKM hijau, refill station, cloud, CSR</li></ul></div>
+<div class="card"><h3>Ke mana dana mengalir</h3><ul class="tick"><li>Pengembangan, cloud, keamanan, desain</li><li>Konten, pemasaran, komunitas, reward</li><li>Legalitas dan aktivasi pilot</li></ul></div>
+</div>
+</section>
+
+<div class="band" id="daftar">
+<div class="orn" style="color:var(--accent-ink)">❧</div>
+<h2>Siap jeda sebentar?</h2>
+<p>Daftar waitlist dan jadi yang pertama mencoba Jeda Hijau di kampusmu.</p>
+<a class="btn" href="https://forms.gle/GANTI-LINK-FORM-KAMU">Daftar sekarang →</a>
+</div>
+
+<footer><span>© 2026 Jeda Hijau</span><span>Scroll less, grow more.</span></footer>
+</div>
+</body>
+</html>
